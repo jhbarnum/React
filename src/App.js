@@ -11,13 +11,17 @@ class App extends Component {
     score: 0,
     highscore: 0,
     clicks: [],
-    quote: "",
     friends
   };
 
-  componentDidMount = () => {
-    this.quote("Clicky Game")
-  }
+
+
+//  componentDidMount(){
+
+//  };
+
+
+
   // Fisher Yates Shuffle
   shuffleArray = array => {
     let i = array.length, temp, r;
@@ -46,11 +50,10 @@ class App extends Component {
     this.setState({ score: this.state.score + 1});
   }
 };
-
-handleOnchange = (id,phrase) => {
-  this.checkClicks(id)
-  this.shuffleArray(this.state.friends)
-};
+// handleOnchange = (id) => {
+//   this.checkClicks(id)
+//   this.shuffleArray(this.state.friends)
+// };
 
 
   // removeFriend = id => {
@@ -62,6 +65,9 @@ handleOnchange = (id,phrase) => {
 
   // Map over this.state.friends and render a FriendCard component for each friend object
   render() {
+    this.shuffleArray(this.state.friends)
+    console.log(friends);
+    
     return (
       <Wrapper>
         <Title>Friends List</Title>
@@ -78,6 +84,7 @@ handleOnchange = (id,phrase) => {
         ))}
       </Wrapper>
     );
+
   }
 }
 
