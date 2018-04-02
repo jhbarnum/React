@@ -10,7 +10,7 @@ class App extends Component {
   state = {
     score: 0,
     highscore: 0,
-    clicks: [],
+    clickedFriends: [],
     friends
   };
 
@@ -20,7 +20,12 @@ class App extends Component {
 
 //  };
 
-
+  handleIncrement = () => {
+    console.log("points");
+    // console.log(id);
+    // We always use the setState method to update a component's state
+    this.setState({ score: this.state.score + 1 });
+  };
 
   // Fisher Yates Shuffle
   shuffleArray = array => {
@@ -37,7 +42,7 @@ class App extends Component {
 
   // Reset game if click is doubled
   checkClicks = id => {
-    if(this.state.clicks.includes(id)) {
+    if(this.state.clickedFriends.includes(id)) {
       this.setState({ score: 0, clicks: [] })
     } else {
       if (this.state.score + 1 > this.state.highscore) {
@@ -56,23 +61,25 @@ class App extends Component {
 // };
 
 
-  // removeFriend = id => {
-  //   // Filter this.state.friends for friends with an id not equal to the id being removed
-  //   const friends = this.state.friends.filter(friend => friend.id !== id);
-  //   // Set this.state.friends equal to the new friends array
-  //   this.setState({ friends });
-  // };
+  removeFriend = id => {
+    // Filter this.state.friends for friends with an id not equal to the id being removed
+    const friends = this.state.friends.filter(friend => friend.id !== id);
+    // Set this.state.friends equal to the new friends array
+    this.setState({ friends });
+  };
 
   // Map over this.state.friends and render a FriendCard component for each friend object
   render() {
-    this.shuffleArray(this.state.friends)
+    this.shuffleArray(this.state.friends);
     console.log(friends);
     
     return (
       <Wrapper>
+        <p className="card-text">Click Count: {this.state.score}</p>
         <Title>Friends List</Title>
         {this.state.friends.map(friend => (
           <FriendCard
+            handleIncrement={this.handleIncrement}
             removeFriend={this.removeFriend}
             id={friend.id}
             key={friend.id}

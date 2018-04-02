@@ -1,9 +1,12 @@
 import React from "react";
 import "./FriendCard.css";
 
+
+
+
 const FriendCard = props => (
-  <div className="card">
-    <div className="img-container">
+  <div className="card" onClick={props.handleIncrement}>
+    <div className="img-container" >
       <img alt={props.name} src={props.image} />
     </div>
     <div className="content">
@@ -19,9 +22,9 @@ const FriendCard = props => (
         </li>
       </ul>
     </div>
-    <span onClick={() => props.removeFriend(props.id)} className="remove">
+    {/* <span onClick={() => props.removeFriend(props.id)} className="remove">
       𝘅
-    </span>
+    </span> */}
   </div>
 );
 
