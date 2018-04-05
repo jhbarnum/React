@@ -20,8 +20,8 @@ class App extends Component {
 
 //  };
 
-  handleIncrement = () => {
-    console.log("points");
+  handleIncrement = (props) => {
+    console.log("points" + props);
     // console.log(id);
     // We always use the setState method to update a component's state
     this.setState({ score: this.state.score + 1 });
