@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import FriendCard from "./components/FriendCard";
 import Wrapper from "./components/Wrapper";
+import Navbar from "./components/Navbar";
 import Title from "./components/Title";
+import Body from "./components/Body";
 import friends from "./friends.json";
 import "./App.css";
 
@@ -11,6 +13,8 @@ class App extends Component {
     score: 0,
     highscore: 0,
     clickedFriends: [],
+    message: "Clicky Game",
+    gameInfo: "Click on each face to earn points. Don't click the same one twice or you'll have to start over!",
     friends
   };
 
@@ -28,8 +32,10 @@ class App extends Component {
   }
 
   handleIncrement = (props) => {
-    console.log("points " + props);
+    
     this.setState({ score: this.state.score + 1 });
+    
+    
   };
 
   // Fisher Yates Shuffle
@@ -49,18 +55,30 @@ class App extends Component {
   handleOnClick = id => {
     if(this.state.clickedFriends.includes(id)) {
       this.setState({ score: 0, clickedFriends: [] })
-      } else {
-        if (this.state.score + 1 > this.state.highscore) {
+      this.setState({ gameInfo: "Oooooops, start over."})
+    } else if (this.state.score === 11) {
+      this.setState({ score: 0, clickedFriends: [] })
+      this.setState({ gameInfo: "You Win! Click on any face to start another round." })
+      this.setState({ highscore: 12 })
+    }
+      
+      else {
+        if (this.state.score + 1 > this.state.highscore) { 
           this.setState({
           highscore: this.state.score + 1
           
-        })
+          })
+        }
+        this.setState({ gameInfo: "Click on each face to earn points. Don't click the same one twice or you'll have to start over!"})
+        this.state.clickedFriends.push(id);
+        console.log("clicked Friends" + this.state.clickedFriends);
+        this.setState({ score: this.state.score + 1});
+        if (this.state.score === 11) {
+          this.setState({ gameInfo: "You Win! Click on any face to start another round." })
+        }
+      console.log("points " + this.state.score);
       }
-    this.state.clickedFriends.push(id);
-    console.log("clicked Friends" + this.state.clickedFriends);
-    this.setState({ score: this.state.score + 1});
-  }
-};
+    };
 
 
   // removeFriend = id => {
@@ -77,13 +95,13 @@ class App extends Component {
     
     return (
       <Wrapper>
-        <p className="card-text">Points: {this.state.score} | High Score: {this.state.highscore}</p>
-        <Title>Friends List</Title>
+        <Navbar className="score" score={this.state.score}  highscore={this.state.highscore} />
+        <Title className="title" message={this.state.message} />
+        <Body className="body" gameInfo={this.state.gameInfo} />
         {this.state.friends.map(friend => (
           <FriendCard
             handleOnChange={this.handleOnChange}
             handleIncrement={this.handleIncrement}
-            removeFriend={this.removeFriend}
             id={friend.id}
             key={friend.id}
             name={friend.name}
