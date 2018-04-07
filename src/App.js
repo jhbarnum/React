@@ -106,8 +106,7 @@ class App extends Component {
             key={friend.id}
             name={friend.name}
             image={friend.image}
-            occupation={friend.occupation}
-            location={friend.location}
+            
           />
         ))}
       </Wrapper>
