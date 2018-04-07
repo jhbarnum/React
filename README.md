@@ -5,7 +5,7 @@ Play this game by clicking each picture once. Click on the same picture twice, y
 
 
 
-![StartGame](/images/begin.png)
+![StartGame](/readmeimages/start.png)
 
 Start guessing letters.
 
