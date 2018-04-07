@@ -7,9 +7,9 @@ Play this game by clicking each picture once. Click on the same picture twice, y
 
 ![StartGame](/readmeimages/Start.png)
 
-Start guessing letters.
+Start clicking away.
 
-![StartGuessing](/images/guessOne.png)
+![StartGuessing](/readmeimages/Active.png)
 
 As you guess, your guessed letters are stored and shown to you so you can avoid using them again.
 
