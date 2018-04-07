@@ -20,10 +20,15 @@ class App extends Component {
 
 //  };
 
+
+  handleOnChange = (props) => {
+    this.handleIncrement(props);
+    this.handleOnClick(props.id)
+    this.shuffleArray(this.state.friends)
+  }
+
   handleIncrement = (props) => {
-    console.log("points" + props);
-    // console.log(id);
-    // We always use the setState method to update a component's state
+    console.log("points " + props);
     this.setState({ score: this.state.score + 1 });
   };
 
@@ -41,32 +46,29 @@ class App extends Component {
   }
 
   // Reset game if click is doubled
-  checkClicks = id => {
+  handleOnClick = id => {
     if(this.state.clickedFriends.includes(id)) {
-      this.setState({ score: 0, clicks: [] })
-    } else {
-      if (this.state.score + 1 > this.state.highscore) {
-        this.setState({
+      this.setState({ score: 0, clickedFriends: [] })
+      } else {
+        if (this.state.score + 1 > this.state.highscore) {
+          this.setState({
           highscore: this.state.score + 1
           
         })
       }
-    this.state.clicks.push(id)
+    this.state.clickedFriends.push(id);
+    console.log("clicked Friends" + this.state.clickedFriends);
     this.setState({ score: this.state.score + 1});
   }
 };
-// handleOnchange = (id) => {
-//   this.checkClicks(id)
-//   this.shuffleArray(this.state.friends)
-// };
 
 
-  removeFriend = id => {
-    // Filter this.state.friends for friends with an id not equal to the id being removed
-    const friends = this.state.friends.filter(friend => friend.id !== id);
-    // Set this.state.friends equal to the new friends array
-    this.setState({ friends });
-  };
+  // removeFriend = id => {
+  //   // Filter this.state.friends for friends with an id not equal to the id being removed
+  //   const friends = this.state.friends.filter(friend => friend.id !== id);
+  //   // Set this.state.friends equal to the new friends array
+  //   this.setState({ friends });
+  // };
 
   // Map over this.state.friends and render a FriendCard component for each friend object
   render() {
@@ -75,10 +77,11 @@ class App extends Component {
     
     return (
       <Wrapper>
-        <p className="card-text">Click Count: {this.state.score}</p>
+        <p className="card-text">Points: {this.state.score} | High Score: {this.state.highscore}</p>
         <Title>Friends List</Title>
         {this.state.friends.map(friend => (
           <FriendCard
+            handleOnChange={this.handleOnChange}
             handleIncrement={this.handleIncrement}
             removeFriend={this.removeFriend}
             id={friend.id}
