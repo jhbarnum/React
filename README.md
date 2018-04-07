@@ -11,16 +11,7 @@ Start clicking away.
 
 ![StartGuessing](/readmeimages/Active.png)
 
-As you guess, your guessed letters are stored and shown to you so you can avoid using them again.
+Get all twelve and you win!
 
-![GuessTwo](/images/guessTwo.png)
+![GuessTwo](/readmeimages/YouWin.png)
 
-Win or lose, you will be offered a chance to play again.
-
-![GuessThree](/images/guessThree.png)
-
-
-![PlayAgain](/images/playAgain.png)
-
-
-![EndGame](/images/endGame.png)
